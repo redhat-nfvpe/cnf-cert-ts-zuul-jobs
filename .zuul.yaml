@@ -1,0 +1,12 @@
+- job:
+    name: no-op
+    description: Run github pr integration test
+    run: playbooks/no-op.yaml
+
+- project:
+    check:
+      jobs:
+        - no-op
+    gate:
+      jobs:
+        - no-op
