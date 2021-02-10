@@ -1,12 +1,14 @@
-- job:
-    name: no-op
-    description: Run github pr integration test
-    run: playbooks/no-op.yaml
+-  job:
+    name: install-cnf-cert-ts-reqs
+    roles:
+      - ensure-go:
+      - ensure-golangci-lint:
 
 - project:
     check:
       jobs:
-        - no-op
+        - install-cnf-cert-ts-reqs:
+
     gate:
       jobs:
-        - no-op
+        - install-cnf-cert-ts-reqs:
