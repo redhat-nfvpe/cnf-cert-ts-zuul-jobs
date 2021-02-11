@@ -1,12 +1,13 @@
 - job:
-    name: install-cnf-cert-ts-reqs
-    run: playbooks/install.yaml
+    name: cnf-cert-test
+    run: 
+      - playbooks/install.yaml
 
 
 - project:
     check:
       jobs:
-        - install
+        - cnf-cert-test
     gate:
       jobs:
-        - install
+        - cnf-cert-test

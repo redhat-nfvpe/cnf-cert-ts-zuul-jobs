@@ -2,3 +2,8 @@
   roles:
     - ensure-go
     - ensure-golangci-lint
+
+  pre_tasks:
+    - package:
+        name: jq
+        
