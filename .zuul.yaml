@@ -1,14 +1,5 @@
--  job:
+```yaml
+- job:
     name: install-cnf-cert-ts-reqs
-    roles:
-      - ensure-go:
-      - ensure-golangci-lint:
-
-- project:
-    check:
-      jobs:
-        - install-cnf-cert-ts-reqs:
-
-    gate:
-      jobs:
-        - install-cnf-cert-ts-reqs:
+    run: playbooks/install.yaml
+```

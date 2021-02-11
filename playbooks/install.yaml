@@ -1,0 +1,6 @@
+```yaml
+- hosts: all
+  roles:
+    - ensure-go
+    - ensure-golangci-lint
+```
