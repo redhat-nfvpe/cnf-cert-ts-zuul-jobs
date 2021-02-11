@@ -1,13 +1,12 @@
 - job:
-    name: no-op
-    description: Run github pr integration test
-    run: playbooks/no-op.yaml
+    name: install-cnf-cert-ts-reqs
+    run: playbooks/install.yaml
+
 
 - project:
     check:
       jobs:
-        - no-op
-        - noop
+        - install
     gate:
       jobs:
-        - no-op
+        - install
