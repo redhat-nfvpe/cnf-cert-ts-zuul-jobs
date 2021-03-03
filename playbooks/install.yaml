@@ -1,9 +1,41 @@
-- hosts: all
-  roles:
-    - ensure-go
-    - ensure-golangci-lint
+- hosts: g2-nuc-1
 
-  pre_tasks:
-    - package:
-        name: jq
+  tasks:
+    - name: Install Golang
+      yum:
+        name=golang
+        update_cache=yes
+        state=latest
+
+    - name: Install GolangCI-Lint
+      shell: curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.30.0
+
+    - name: Install epel
+      yum: 
+        name=epel-release 
+        update_cache=yes 
+        state=latest
+
+    - name: Install jq
+      yum: 
+        name=jq 
+        update_cache=yes 
+        state=latest
+
+    - name: Install build tools and other required software 
+      shell: make install-tools
+      args:
+        chdir: /home/g262/cnf-cert-ci/test-network-function
+  
+    - name: (Re)generate mock files as needed 
+      shell: |
+        PATH=~/go/bin:$PATH
+        make mocks
+      args:
+        chdir: /home/g262/cnf-cert-ci/test-network-function
+  
+    - name: Update source dependencies and fix versions 
+      shell: make update-deps
+      args:
+        chdir: /home/g262/cnf-cert-ci/test-network-function
         
