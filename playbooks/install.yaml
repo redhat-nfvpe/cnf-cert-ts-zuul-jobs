@@ -38,4 +38,10 @@
       shell: make update-deps
       args:
         chdir: /home/g262/cnf-cert-ci/test-network-function
-        
+
+    - name: Build the CNF test binary 
+      shell: make build-cnf-tests
+      args:
+        chdir: /home/g262/cnf-cert-ci/test-network-function
+
+
