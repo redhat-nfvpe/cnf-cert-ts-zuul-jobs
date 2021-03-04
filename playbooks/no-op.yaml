@@ -1,6 +1,0 @@
-- hosts: all
-  tasks:
-    - name: Test cnf-cert-ts project github PR Zuul connection part deux  
-      shell:
-        cmd: "sleep 60"
-        chdir: "{{ zuul.project.src_dir }}"
