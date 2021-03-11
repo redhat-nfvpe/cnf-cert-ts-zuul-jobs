@@ -1,5 +1,75 @@
 - hosts: g2-nuc-1
-  roles:
-    - ensure-go
-    - ensure-golangci-lint
+
+  tasks:
+  - name: Install test-network-function package requirements
+    yum:
+      name:
+        - golang
+        - epel-release
+        - jq
+        - zip
+        - unzip
+        - git
+      state: latest
+      update_cache: yes
+
+  - name: Install GolangCI-Lint
+    shell: curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.30.0
+
+  - name: Download Openshift Client (oc)
+    get_url:
+      url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable-4.6/openshift-client-linux-4.6.19.tar.gz
+      dest: /usr/tmp
+      force_basic_auth: yes
+
+  - name: Install Openshift Client (oc)
+    ansible.builtin.unarchive:
+      src: /usr/tmp/openshift-client-linux-4.6.20.tar.gz
+      dest: /usr/bin
+      remote_src: yes
+
+#        wget https://openshift-release-artifacts.apps.ci.l2s4.p1.openshiftapps.com/4.6.20/openshift-client-linux-4.6.20.tar.gz
+
+  - name: git clone test-network-function
+    ansible.builtin.git:
+      repo: 'https://github.com/redhat-nfvpe/test-network-function.git'
+      dest: "{{ home_dir }}/cnf-cert-ci/test-network-function/"
+      update: yes
+      force: yes
+      
+  - name: Install build tools and other required software 
+    shell: make install-tools
+    args:
+      chdir: "{{ home_dir }}/cnf-cert-ci/test-network-function"
+
+  - name: (Re)generate mock files as needed 
+    shell: |
+      PATH=~/go/bin:$PATH
+      make mocks
+    args:
+      chdir: "{{ home_dir }}/cnf-cert-ci/test-network-function"
+
+  - name: Update source dependencies and fix versions 
+    shell: make update-deps
+    args:
+      chdir: "{{ home_dir }}/cnf-cert-ci/test-network-function"
+
+# Gotcha: The make build* commands run unit tests where appropriate. They do NOT test the CNF.
+
+  - name: Build the CNF test binary 
+    shell: make build-cnf-tests
+    args:
+      chdir: "{{ home_dir }}/cnf-cert-ci/test-network-function"
+
+  - name: git clone cnf-certification-test-partner
+    ansible.builtin.git:
+      repo: 'https://github.com/redhat-nfvpe/cnf-certification-test-partner.git'
+      dest: "{{ home_dir }}/cnf-cert-ci/cnf-certification-test-partner/"
+      update: yes
+      force: yes
+
+  - name: Build cnf-certification-test-partner 
+    shell: export KUBECONFIG={{ home_dir }}/.kube/config && make install
+    args:
+      chdir: "{{ home_dir }}/cnf-cert-ci/cnf-certification-test-partner"
 
