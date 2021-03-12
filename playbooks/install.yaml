@@ -28,8 +28,6 @@
       dest: /usr/bin
       remote_src: yes
 
-#        wget https://openshift-release-artifacts.apps.ci.l2s4.p1.openshiftapps.com/4.6.20/openshift-client-linux-4.6.20.tar.gz
-
   - name: git clone test-network-function
     ansible.builtin.git:
       repo: 'https://github.com/redhat-nfvpe/test-network-function.git'
