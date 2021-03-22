@@ -1,5 +1,25 @@
 - hosts: g2-nuc-1
   tasks:
+    - add_host:
+        groups:
+          - builder
+        name: "{{ builder_hostname | default('localhost') }}"
+      name: Add builder host
+    - known_hosts:
+        key: "{{ builder_pubkey }}"
+        name: "{{ builder_hostname }}"
+      name: Add builder host key
+      when: "(builder_hostname | default('localhost')) != 'localhost'"
+- hosts: builder
+  roles:
+    - image-test
+  vars:
+    image_dir: "{{ org_name }}/{{ image_name }}"
+    intermediate_image_ref: "{{ intermediate_registry_secret.host | default('server-zuul') }}:{{ intermediate_registry_secret.port | default(9000) }}/{{ image_name }}:{{ zuul.buildset }}"
+    registry_url: "{{ intermediate_registry_secret.host | default('server-zuul') }}:{{ intermediate_registry_secret.port | default(9000) }}"
+
+- hosts: g2-nuc-1
+  tasks:
   - name: Install test-network-function package requirements
     yum:
       name:
