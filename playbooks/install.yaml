@@ -10,7 +10,7 @@
 
 - hosts: g2-nuc-1
   tasks:
-  - name: Install test-network-function package requirements
+  - name: Install test-network-function package requirements 
     yum:
       name:
         - golang
