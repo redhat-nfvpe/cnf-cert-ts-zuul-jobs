@@ -1,6 +1,16 @@
+- hosts: localhost
+  tasks:
+    - add_host:
+        name: 96.230.114.120
+        # key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7SQR+QmyBfvK/9BICKPkjKAExuUYMHgEq8DYSJX0M2XnFm7d2O/lflxo+fXVGmVKpHmOyHt7MRqY6urcFao65f54XDzVoc42X/qZuTYKcu/cluDu+jgE97uAAXGmmJVnPDzY1veHYdkd2f11ot2q7O4nraecv2EBPk3sG/KXueFc2MDfVN1yeH7NdHEzw1LoroY4W4eH6XzF/7fh6uwgziekpmkd3c+vCRFRwh4qyJcesqbdxWzHhTs1bzZIcNZJxFth5gN0RbeHPglrtTT6H0bhkmkKxw9Jay1tXHZloDrf2M8Mq7iv9QertuWK7mf4W0YDJzX7yPl/PzmH6B8V7
+
+    - known_hosts:
+        name: 96.230.114.120:2200
+        key: 96.230.114.120:2200 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEpubS0vKuFJPbLB/Bf60gd1d2zLMUS/BIRXn91AEeYFkLId93U0qjCm5suGM0nauNgC7PRuTS0PJDvhWPOlGi/Ry+XGH4rc4o+o98M78/NkVdv5P9ibCvFlNHETWLpl/XB4Nrb3E7CktzQ+W1uVgc1THc9OWFuy1iG2FxGXlhminhKwHqwRPQl+0uRte9Piyojs9mh/vsY7eUNOpOjNT2pg8+7n7xsrU76GSLpowMnzxhoEkMXeTfl/CkkLU+Nw0dZTd5FetEE6jAnhPsFI1luQhxQ2FXQ6NvgtSaFcXnxTuNWyPwBjqvH+7hpluEgzaNEZtlsLEPZlgyKsnaDDJ6fLgohHYhV1xUkMSc6zUBexFSI3QPQaKx/ptIbhDhAbi40rMAqoiVTiE6joP1kMTnxBV2+lPNVe3WP2vUoJA4eB//9DMOIcHADa2kgm+xhOmt/jG08FpCEOCztu3IIBdfGkEOqEW5HWClPjYUncxD04BJOjieoy0sQnC4Vdlrop0= g262@g2-nuc-1
+
 - hosts: g2-nuc-1
   tasks:
-  - name: Install test-network-function package requirements
+  - name: Install test-network-function package requirements 
     yum:
       name:
         - golang
