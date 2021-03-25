@@ -1,7 +1,7 @@
 - hosts: localhost
   tasks:
     - add_host:
-        hostname: 96.230.114.120
+        hostname: 96.230.114.120 #temp
         ansible_ssh_host: g2-nuc-1
         ansible_ssh_port: 2200
 
@@ -11,6 +11,12 @@
         
 - hosts: g2-nuc-1
   tasks:
+
+- name: Prints a debug message
+  ansible.builtin.debug:
+    msg:
+    - "a message"
+
   - name: Install test-network-function package requirements 
     yum:
       name:
