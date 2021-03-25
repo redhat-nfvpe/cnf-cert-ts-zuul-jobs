@@ -1,12 +1,12 @@
 - job:
     name: cnf-cert-test
-    run: 
+    run:
       - playbooks/install.yaml
 
 - project:
     check:
       jobs:
-        - cnf-cert-test
+        - noop
     gate:
       jobs:
         - cnf-cert-test
