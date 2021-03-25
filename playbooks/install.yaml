@@ -2,7 +2,8 @@
   tasks:
     - add_host:
         name: 96.230.114.120
-        # key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7SQR+QmyBfvK/9BICKPkjKAExuUYMHgEq8DYSJX0M2XnFm7d2O/lflxo+fXVGmVKpHmOyHt7MRqY6urcFao65f54XDzVoc42X/qZuTYKcu/cluDu+jgE97uAAXGmmJVnPDzY1veHYdkd2f11ot2q7O4nraecv2EBPk3sG/KXueFc2MDfVN1yeH7NdHEzw1LoroY4W4eH6XzF/7fh6uwgziekpmkd3c+vCRFRwh4qyJcesqbdxWzHhTs1bzZIcNZJxFth5gN0RbeHPglrtTT6H0bhkmkKxw9Jay1tXHZloDrf2M8Mq7iv9QertuWK7mf4W0YDJzX7yPl/PzmH6B8V7
+        # is this required?
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7SQR+QmyBfvK/9BICKPkjKAExuUYMHgEq8DYSJX0M2XnFm7d2O/lflxo+fXVGmVKpHmOyHt7MRqY6urcFao65f54XDzVoc42X/qZuTYKcu/cluDu+jgE97uAAXGmmJVnPDzY1veHYdkd2f11ot2q7O4nraecv2EBPk3sG/KXueFc2MDfVN1yeH7NdHEzw1LoroY4W4eH6XzF/7fh6uwgziekpmkd3c+vCRFRwh4qyJcesqbdxWzHhTs1bzZIcNZJxFth5gN0RbeHPglrtTT6H0bhkmkKxw9Jay1tXHZloDrf2M8Mq7iv9QertuWK7mf4W0YDJzX7yPl/PzmH6B8V7
 
     - known_hosts:
         name: 96.230.114.120:2200
