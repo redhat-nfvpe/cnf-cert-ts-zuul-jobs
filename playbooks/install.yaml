@@ -12,10 +12,10 @@
 - hosts: g2-nuc-1
   tasks:
 
-- name: Prints a debug message
-  ansible.builtin.debug:
-    msg:
-    - "a message"
+# - name: Prints a debug message
+#   ansible.builtin.debug:
+#     msg:
+#     - "a message"
 
   - name: Install test-network-function package requirements 
     yum:
